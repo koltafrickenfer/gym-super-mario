@@ -19,4 +19,14 @@ You need to install [gym-pull](https://github.com/koltafrickenfer/gym-pull)
 	env = gym.make('SuperMarioBros-1-1-v0')
 ```
 
-
+add this to your python3.5/site-packages/gym/envs/__init__.py to finish your install, gym_pull is depricated and does not completly work.
+```python
+	register(
+	id='meta-SuperMarioBros-Tiles-v0',
+	entry_point='gym.envs.gym_super_mario:MetaSuperMarioBrosEnv',
+	kwargs={ 'draw_tiles': 1},
+	reward_threshold=(3266 - 40),
+	nondeterministic=True,
+	
+)		
+```

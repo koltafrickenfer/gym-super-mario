@@ -269,3 +269,4 @@ class MetaSuperMarioBrosEnv(SuperMarioBrosEnv, MetaNesEnv):
         std_reward = min(1000, std_reward)  # Cannot be more than 1,000
         std_reward = max(0, std_reward)  # Cannot be less than 0
         return std_reward
+

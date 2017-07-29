@@ -596,12 +596,12 @@ function check_if_finished()
         or (get_level() > 4 * (target_world - 1) + (target_level - 1)) then
         -- Level finished
         -- is_finished will be written to pipe with the get_data() function
-        is_started = 0;
-        is_finished = 1;
+        --is_started = 0;
+        --is_finished = 1;
 
         -- Processing manually last command
-        read_commands();
-        if commands_rcvd == 1 then
+        --read_commands();
+        if commands_rcvd == 2 then
             commands_rcvd = 0
             emu.frameadvance();
             update_positions();
@@ -667,23 +667,7 @@ function parse_commands(line)
         commands["select"] = false;
         joypad.set(1, commands);
 
-    -- Noop at beginning of level (to simulate seed)
-    elseif ("noop" == command) and (tonumber(frame_number) == last_processed_frame) then
-        local noop_count = tonumber(data);
-        commands["up"] = false;
-        commands["left"] = false;
-        commands["down"] = false;
-        commands["right"] = false;
-        commands["A"] = false;
-        commands["B"] = false;
-        commands["start"] = false;
-        commands["select"] = false;
-        joypad.set(1, commands);
-        if noop_count > 0 then
-            for i=1,noop_count,1 do
-                emu.frameadvance();
-            end;
-        end;
+   
 
     -- Changing level
     elseif ("changelevel" == command) and (tonumber(data) >= 0) and (tonumber(data) <= 31) then
@@ -698,7 +682,7 @@ function parse_commands(line)
         end;
         target = target_world .. target_level .. target_area;
         is_started = 0;
-        is_finished = 0;
+        is_finished = 1;
         changing_level = 0;
         reset_vars();
         emu.softreset();
@@ -895,3 +879,4 @@ end;
 while (true) do
     main_loop();
 end;
+

@@ -48,7 +48,7 @@ class NesEnv(gym.Env, utils.EzPickle):
         self.action_space = spaces.MultiDiscrete([[0, 1]] * NUM_ACTIONS)
         self.observation_space = spaces.Box(low=0, high=255, shape=(self.screen_height, self.screen_width, 3))
         self.launch_vars = {}
-        self.cmd_args = ['--xscale 2', '--yscale 2', '-f 0']
+        self.cmd_args = ['--xscale 1.5', '--yscale 1.45', '-f 0','--opengl 1.5','--sound 0','--nogui']
         self.lua_path = []
         self.subprocess = None
         self.no_render = True
@@ -280,6 +280,7 @@ class NesEnv(gym.Env, utils.EzPickle):
         restart_counter = 0
         if not self.disable_in_pipe:
             while 0 == self.last_frame:
+                #print( loop_counter)
                 loop_counter += 1
                 sleep(0.001)
                 if 0 == self.is_initialized:
@@ -680,3 +681,4 @@ class MetaNesEnv(NesEnv):
             self.find_new_level = True
 
         return obs, reward, is_finished, info
+

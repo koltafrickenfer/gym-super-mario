@@ -19,7 +19,6 @@ SMB_LEVELS = [
 
 for draw_tiles in range(2):
     tile_suffix = '-Tiles' if draw_tiles == 1 else ''
-
     register(
         id='{}/meta-SuperMarioBros{}-v0'.format(USERNAME, tile_suffix),
         entry_point='{}_gym_super_mario:MetaSuperMarioBrosEnv'.format(USERNAME),
